@@ -7,7 +7,7 @@ btnAgregar.addEventListener("click",()=>{
     let cantidad = document.getElementById("txtCantidad").value; 
     let costo = document.getElementById("txtCosto").value; 
     let producto = new Producto(codigo, nombre, cantidad, costo); 
-    inventario.agregar(producto);
+    inventario.agregar(codigo, producto);
     document.getElementById("divDetalles").innerHTML += "<p> Se agrego el producto </p>"; 
 });
 
@@ -27,7 +27,8 @@ const btnEliminar = document.getElementById("btnEliminar");
 btnEliminar.addEventListener("click",()=>{
     let codigo = document.getElementById("txtCodigo").value;
     inventario.eliminar(codigo);  
-    document.getElementById("divDetalles").innerHTML += "<p> Se elimino un producto</p>"; 
+    document.getElementById("divDetalles").innerHTML += "<p> Se elimino un producto</p>";
+    
 });
 
 const btnListar = document.getElementById("btnListar");

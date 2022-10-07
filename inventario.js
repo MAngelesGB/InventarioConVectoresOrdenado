@@ -3,9 +3,31 @@ class Inventario{
         this.inventario = new Array(); 
     }
 
-    agregar(producto)
+    agregar(codigo, producto)
     {
-        this.inventario.push(producto);
+        let agregado=false;
+       if((this.inventario.length === 0) || (this.inventario[this.inventario.length-1].getCodigo() < codigo))
+       {
+            this.inventario.push(producto);
+       }
+       else 
+        {
+            let fin=this.inventario.length;
+            for(let i = 0; i < fin && !agregado; i++)
+            {
+                if(this.inventario[i].getCodigo() > codigo)
+                {   
+                    
+                    for(let j = this.inventario.length-1; j >= i; j--)
+                    {   
+                        this.inventario[j+1] = this.inventario[j];
+                    }
+                    this.inventario[i] = producto;
+                    agregado=true;
+                }
+            }
+        }
+        
     }
 
     buscar(codigo)
@@ -19,7 +41,6 @@ class Inventario{
             valorMedio = Math.floor((primerValor+ultimoValor)/2);
 
             if(this.inventario[valorMedio].getCodigo() === codigo)
-
                 return this.inventario[valorMedio];
 
             else if(this.inventario[valorMedio].getCodigo() > codigo)
@@ -35,19 +56,32 @@ class Inventario{
 
     eliminar(codigo)
     {
-        /*
-        for(let i = 0; i <= this.inventario.length-1; i++) 
+        let primerValor  = 0; 
+        let ultimoValor = this.inventario.length - 1;
+        let valorMedio = 0; 
+        
+        while(primerValor <= ultimoValor)
         {
-            if(codigo === this.inventario[i].getCodigo())
+            valorMedio = Math.floor((primerValor+ultimoValor)/2);
+
+            if(this.inventario[valorMedio].getCodigo() === codigo)
             {
-                for(let j = i; j <= this.inventario.length-1; j++)
+                for(let j = valorMedio; j <= ultimoValor; j++)
                 {   
                     this.inventario[j]= this.inventario[j+1];
                 }
                 this.inventario.pop();
-            }     
+            }
+            else if(this.inventario[valorMedio].getCodigo() > codigo)
+            { 
+                ultimoValor = valorMedio -1; 
+            }
+            else
+            {
+                primerValor = valorMedio +1;
+            }
+
         }
-        */
     }
 
     listar()
