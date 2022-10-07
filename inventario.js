@@ -13,21 +13,24 @@ class Inventario{
         let primerValor  = 0; 
         let ultimoValor = this.inventario.length - 1;
         let valorMedio = 0; 
-        let posicion = -1; 
         
         while(primerValor <= ultimoValor)
         {
             valorMedio = Math.floor((primerValor+ultimoValor)/2);
 
             if(this.inventario[valorMedio].getCodigo() === codigo)
-                return this.inventario[posicion];
-            else if(this.inventario[valorMedio] > codigo)
+
+                return this.inventario[valorMedio];
+
+            else if(this.inventario[valorMedio].getCodigo() > codigo)
                 ultimoValor = valorMedio -1; 
 
             else
                 primerValor = valorMedio +1;
 
         }
+
+        return null; 
     }
 
     eliminar(codigo)
@@ -45,30 +48,6 @@ class Inventario{
             }     
         }
         */
-
-        let primerValor  = 0; 
-        let ultimoValor = this.inventario.length - 1;
-        let valorMedio = 0; 
-        
-        while(primerValor <= ultimoValor)
-        {
-            valorMedio = Math.floor((primerValor+ultimoValor)/2);
-
-            if(this.inventario[valorMedio] === codigo)
-            {
-                for(let i = valorMedio; i <= this.inventario.length-1; i++)
-                {   
-                    this.inventario[i]= this.inventario[i+1];
-                }
-                this.inventario.pop();
-            }
-            else if(this.inventario[valorMedio] > codigo)
-                ultimoValor = valorMedio -1; 
-
-            else
-                primerValor = valorMedio +1;
-
-        }
     }
 
     listar()
